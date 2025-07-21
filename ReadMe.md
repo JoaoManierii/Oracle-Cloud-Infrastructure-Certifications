@@ -137,4 +137,3 @@ Gerencia identidades (usuários, grupos, recursos) e permissões via policies le
 | MFA 🔐 | MFA | MFA/Conditional Access | MFA |
 | Audit Logs 🕵️ | CloudTrail | Activity Log | Cloud Audit Logs |
 
----
