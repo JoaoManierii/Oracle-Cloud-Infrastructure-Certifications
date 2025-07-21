@@ -1,27 +1,84 @@
+# Oracle Cloud Infrastructure Foundations – Resumo de Estudos
+
 ## 1. OCI Architecture *(chatgpt0)*
 
 ### 🌐 Conceitos Fundamentais
-- **Tenancy** 🏢: Raiz lógica da sua presença na OCI (parecido com uma “organização”). Tudo — usuários, políticas, compartments e recursos — existe dentro dela.
-- **Region** 📍: Conjunto geograficamente isolado de infraestrutura (ex.: `sa-saopaulo-1`). Cada região é independente em energia, rede e capacidade. Permite *latency control* e conformidade regulatória.
-- **Availability Domain (AD)** 🏬🏬🏬: Data centers independentes dentro de uma região (0–3). Falha em um AD não impacta os outros → alta disponibilidade horizontal.
-- **Fault Domain (FD)** 🧩: Partições lógicas dentro de um AD (3 por AD). Distribuir instâncias entre FDs evita que manutenção programada ou falha de rack derrube todo o serviço.
-- **VCN (Virtual Cloud Network)** 🔗: Rede virtual isolada (CIDR escolhido pelo cliente) onde vivem subnets, roteamento e segurança.
-  - **Subnets Regionais** 🌍: Se estendem por todos os ADs → simplificam failover.
-  - **Subnets AD-Local** 📦: Restringem recursos a um único AD quando necessário.
-- **Redundância & Alta Disponibilidade** ♻️: Colocar recursos replicados em múltiplos ADs/Fault Domains ou usar serviços *multi-AD* (Autonomous DB, Load Balancer).
-- **Disaster Recovery (DR)** 🚨: Replicação entre **regiões emparelhadas** (Cross-Region Object Storage, Block Volume Replication, Autonomous Data Guard) para recuperar após desastre regional.
-- **Edge Services** 🌍⚡: Pontos de presença globais para DNS, Email Delivery e WAF diminuem latência até o usuário final.
-- **Armazenamento** 💾: Object Storage (standard/archival), Block Volume (replicação automática entre domínios de falha), File Storage (NFS), Archive.
-- **Observabilidade** 👁️: Logging, Monitoring, Events e Alarms integrados para detectar e agir sobre incidentes rapidamente.
+- **Tenancy** 🏢: Raiz lógica da sua presença na OCI (parecido com uma “organização”). Tudo — usuários, políticas, compartments e recursos — existe dentro dela.  
+- **Region** 📍: Conjunto geograficamente isolado de infraestrutura (ex.: `sa-saopaulo-1`). Cada região é independente em energia, rede e capacidade.  
+- **Availability Domain (AD)** 🏬🏬🏬: Data centers independentes dentro de uma região. Falha em um AD não impacta os outros → alta disponibilidade.  
+- **Fault Domain (FD)** 🧩: Partições lógicas dentro de um AD (3 por AD). Distribuir instâncias entre FDs evita que manutenção ou falha de rack derrube todo o serviço.  
+- **VCN (Virtual Cloud Network)** 🔗: Rede virtual isolada (CIDR escolhido) onde vivem subnets, roteamento e segurança.  
+  - **Subnet Regional** 🌍: Vale para todos os ADs, simplifica failover.  
+  - **Subnet AD-Local** 📦: Fixa recursos em um AD específico.  
+- **Redundância / Alta Disponibilidade** ♻️: Replicar entre ADs/FDs ou usar serviços multi‑AD (Load Balancer, Autonomous DB).  
+- **Disaster Recovery (DR)** 🚨: Replicação entre regiões (Object Storage Cross-Region, Block Volume Replication, Autonomous Data Guard).  
+- **Edge Services** 🌍⚡: POPs para DNS, WAF, Email Delivery diminuem latência até o usuário final.  
+- **Armazenamento** 💾: Object Storage (standard/archival), Block Volume (replicação automática entre FDs), File Storage (NFS), Archive.  
+- **Observabilidade** 👁️: Logging, Monitoring, Events e Alarms para detectar e responder a incidentes.  
+- **Rede e Segurança** 🔐: Route Tables, Security Lists, Network Security Groups, Internet/NAT/Service Gateways, Local/Remote Peering.  
 
-### 🔁 Fluxos de Tráfego e Segurança
-- **Route Tables** 🛣️: Determinam o próximo salto (Internet/NAT/Service Gateway).
-- **Security Lists / Network Security Groups** 🔐: Controles de firewall em nível de subnet (SL) ou de instância (NSG).
-- **Gateways**:
-  - **Internet Gateway** 🌐: Acesso público.
-  - **NAT Gateway** 🚪: Saída privada sem abrir portas de entrada.
-  - **Service Gateway** 🛰️: Acesso privado a serviços OCI (Object Storage etc.).
-  - **Local Peering / Remote Peering Gateway** 🔄: Conecta VCNs na mesma ou em outra região.
+### 📦 Sintaxe / Identificação dos Serviços OCI
+
+#### OCIDs (Oracle Cloud IDs)
+Cada recurso possui um identificador global único:  
+`ocid1.<resource_type>.<realm>.<region>.<id>`  
+Exemplo: `ocid1.instance.oc1.sa-saopaulo-1.abcd...`  
+
+`<resource_type>` exemplos: `instance`, `subnet`, `vcn`, `bucket`, `autonomousdatabase`, `user`, `compartment`.
+
+#### Tipos Agregados (Resource Families)
+Usados para simplificar políticas de autorização:
+
+| Família (`*-family`) | Abrange |
+|----------------------|--------|
+| `instance-family` | Instâncias, boot volumes, attach/detach |
+| `volume-family` | Block Volumes e backups |
+| `object-family` | Buckets e objetos (Object Storage) |
+| `database-family` | DB Systems, Autonomous Databases |
+| `virtual-network-family` | VCN, subnets, route tables, gateways |
+| `functions-family` | Oracle Functions |
+| `management-dashboard-family` | Dashboards de observabilidade |
+| `logs-family` | Logging |
+| `keys-family` | Vault Keys |
+| `all-resources` | Todos os recursos (usar só para admins) |
+
+(Existem outras famílias específicas, mas estas são as principais.)
+
+#### Tipos de Acesso (Verbos / Ações)
+Hierarquia – cada nível inclui os anteriores:  
+`inspect < read < use < manage`
+
+- **inspect**: Listar metadados (nomes, OCIDs) – sem conteúdo.  
+- **read**: `inspect` + ler conteúdo (ex.: baixar objeto).  
+- **use**: `read` + executar operações funcionais (start/stop instância, gerar tokens).  
+- **manage**: Controle total (criar, atualizar, deletar, alterar políticas internas).  
+
+Também existem permissões específicas usadas em condições ou instruções finas (ex.: `read keys`, `use buckets`, `manage object-family`).
+
+### 🔑 Sintaxe de Policies (AuthZ)
+
+Estrutura básica (uma linha por instrução):  
+`Allow <principal-type> <principal-name> to <verb> <resource-type|family> in <scope> [where <conditions>]`
+
+Componentes:
+- **principal-type**: `group` | `dynamic-group` | `service`
+- **principal-name**: nome do grupo/dynamic group
+- **verb**: `inspect|read|use|manage` ou ação específica
+- **resource-type|family**: `instance-family`, `buckets`, `all-resources` etc.
+- **scope**: `tenancy` ou `compartment <nome|ocid>`
+- **conditions (opcional)**: filtros com tags ou atributos
+
+Exemplos de policies:
+Allow group Admins to manage all-resources in tenancy
+Allow group Devs to use instance-family in compartment Dev
+Allow dynamic-group BatchInstances to use object-family in compartment Shared where any { request.permission='OBJECT_CREATE' }
+Allow group Auditors to read audit-events in tenancy
+
+
+Condições comuns:
+- `request.permission = '<permissão>'`
+- `target.compartment.id = 'ocid1.compartment...'`
+- `target.resource.tag.<namespace>.<key> = 'valor'`
 
 ### 🧩 Comparação com Concorrentes
 | Conceito OCI | AWS | Azure | GCP |
@@ -29,9 +86,9 @@
 | Tenancy 🏢 | Account | Subscription | Project |
 | Region 📍 | Region | Region | Region |
 | Availability Domain 🏬 | Availability Zone | Availability Zone | Zone |
-| Fault Domain 🧩 | (Partition Placement Groups) | Fault Domain | (Distribuir entre Zones) |
+| Fault Domain 🧩 | (Partition Placement) | Fault Domain | (Distribuir entre Zones) |
 | Compartments 📂 | Accounts/OUs + Tags | Resource Groups | Folders/Projects |
-| VCN 🔗 | VPC | Virtual Network | VPC |
+| VCN 🔗 | VPC | VNet | VPC |
 | Service Gateway 🛰️ | VPC Endpoint / PrivateLink | Private Link / Service Endpoint | Private Service Connect |
 | Cross-Region DR 🚨 | S3 CRR / RDS Replicas | GRS Storage / Geo-Rep | Multi-/Dual-Region Storage |
 | Edge DNS/WAF 🌍 | Route53 / CloudFront WAF | Azure DNS / Front Door | Cloud DNS / Cloud Armor |
@@ -41,45 +98,42 @@
 ## 2. Identity and Access Management (IAM)
 
 ### 🔐 IAM Introduction
-O **OCI IAM** controla **quem** (usuários, grupos, recursos) pode fazer **o quê** (ações) em **quais recursos** e **onde** (tenancy ou compartment). Usa políticas legíveis:  
-`Allow group Devs to use subnets in compartment Dev`.
+Gerencia identidades (usuários, grupos, recursos) e permissões via policies legíveis. Integração com federação SAML/OAuth, MFA e identidades gerenciadas (Instance/Resource Principals).
 
 ### 📂 Compartments & 🪪 Identity Domains
-- **Compartments** 📂: Pastas lógicas hierárquicas para isolar recursos, delegar administração e facilitar billing/auditoria. Políticas podem herdar escopo (política em nível de tenancy enxerga todos os filhos).
-- **Identity Domains** 🪪: Contêm identidades (usuários, grupos, aplicativos), provedores de autenticação (SAML, Social), regras de senha/MFA. Permitem múltiplos domínios isolados dentro da mesma tenancy (ex.: *Employees*, *Partners*).
-- **Boas Práticas**: Estruturar compartments por ambiente (Dev/Test/Prod) ou unidade de negócio; usar domínios distintos para separar identidade externa de interna.
+- **Compartments**: Hierarquia lógica para isolar recursos, delegar administração e facilitar billing/auditoria.  
+- **Identity Domains**: Domínios de identidade independentes com usuários, grupos, provedores de autenticação, políticas de senha e MFA. Permitem separar identidades internas/externas.
 
 ### ✅ AuthN (Autenticação) & 🔓 AuthZ (Autorização)
-- **AuthN**: Verifica identidade. Métodos: senha + MFA, API Keys (par de chaves), Tokens de Autenticação, Federation (SAML/OAuth), **Instance Principals** (VMs chamam API sem chaves estáticas), **Resource Principals** (Functions/OKE).
-- **AuthZ**: Concedida via **Policies** usando níveis de permissão:  
-  - `inspect` (listar metadados), `read` (ver conteúdo), `use` (operar sem gerenciar), `manage` (controle total).  
-- **Principals** especiais:
-  - **Instance Principal** 🖥️: Metadados da instância geram token temporário.
-  - **Resource Principal** ⚙️: Funções, Streams, OKE etc. obtêm identidade gerenciada automaticamente.
-- **Dynamic Groups** 🧠: Agrupam recursos com condições (ex.: todas instâncias com tag `Role=Batch`) para aplicar política sem intervenção manual.
+**AuthN**: Verifica identidade. Métodos: senha + MFA, API Keys, Auth Tokens, Federation (SAML/OAuth), Instance Principals (VMs), Resource Principals (Functions/OKE), tokens de sessão.
+
+**AuthZ**: Concedida por policies (sintaxe acima). Boas práticas:
+- Princípio do menor privilégio (`use` em vez de `manage` quando possível).
+- Usar families (`instance-family`, `object-family`) reduz manutenção.
+- Dynamic Groups: agrupam recursos por condições (ex.: tag ou compartment).  
+  Exemplo de regra de dynamic group:  
+  `ANY {instance.compartment.id = 'ocid1.compartment....'}`  
+  Policy correspondente:  
+  `Allow dynamic-group OKEPods to use object-family in compartment Dev`
+- Condições refinam acesso (permissão específica ou tag exigida).
 
 ### 🏗️ Tenancy Setup (Passo a Passo)
-1. **Planejar Estrutura de Compartments** 📂 (ex.: `Root/Prod`, `Root/Dev`, `Root/Shared`).
-2. **Criar Identity Domains / Federação** 🪪 (conectar Azure AD/Okta).
-3. **Criar Grupos** 👥 (`Admins`, `Devs`, `Auditors`).
-4. **Definir Policies** 📜:  
-   - `Allow group Admins to manage all-resources in tenancy`  
-   - `Allow group Devs to use instances in compartment Dev`  
-   - `Allow dynamic-group BatchInstances to use object-family in compartment Shared`
-5. **Configurar Segurança** 🔐: MFA obrigatório, rotação de chaves/API Keys.
-6. **Ativar Audit & Logging** 🕵️: Monitorar mudanças e acessos.
-7. **Automatizar** 🤖: Usar Instance/Resource Principals para pipelines sem credenciais fixas.
+1. Estrutura de compartments.  
+2. Identity Domains / Federação.  
+3. Grupos e Dynamic Groups.  
+4. Policies (menor privilégio).  
+5. MFA e rotação de chaves.  
+6. Auditoria habilitada (Audit/Logging).  
+7. Automatização com Instance/Resource Principals.  
 
-### 🤝 Comparação com Concorrentes
+### 🤝 Comparação (IAM)
 | Recurso OCI | AWS | Azure | GCP |
 |-------------|-----|-------|-----|
-| Usuários/Grupos 👥 | IAM Users/Groups | Azure AD Users/Groups | IAM Members |
-| Policies 📜 | IAM Policy JSON | RBAC Role Assignment | IAM Policy (Bindings) |
-| Compartments 📂 | Accounts/OUs/Tags | Resource Groups | Folders/Projects |
-| Identity Domains 🪪 | IAM Identity Center (SSO) | Azure AD Tenants | Cloud Identity |
-| Dynamic Groups 🧠 | IAM Conditions + Tags | Dynamic Groups (Preview) | IAM Conditions |
-| Instance Principals 🖥️ | EC2 Instance Profile (IAM Role) | Managed Identity | Service Account |
+| Policies 📜 | IAM Policy JSON | RBAC Role Assignment | IAM Bindings |
+| Dynamic Groups 🧠 | IAM Conditions + Tags | Dynamic Groups | IAM Conditions |
+| Instance Principals 🖥️ | EC2 Instance Role | Managed Identity | Service Account |
 | Resource Principals ⚙️ | Lambda Execution Role | Managed Identity | Service Account |
+| Compartments 📂 | Accounts/OUs/Tags | Resource Groups | Folders/Projects |
 | MFA 🔐 | MFA | MFA/Conditional Access | MFA |
 | Audit Logs 🕵️ | CloudTrail | Activity Log | Cloud Audit Logs |
 
