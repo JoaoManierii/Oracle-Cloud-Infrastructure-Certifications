@@ -1,12 +1,17 @@
 # Oracle Cloud Infrastructure Foundations – Resumo de Estudos
 
-## 1. OCI Architecture *(chatgpt0)*
+<div align="center"><img src="slides/SaaS.png" alt="SaaS" width="600" height="300" /></div>
+
+## 1. OCI Architecture
 
 ### 🌐 Conceitos Fundamentais
+<div align="center"><img src="slides/architecture.png" alt="architecture" width="600" height="300" /></div>
+
 - **Tenancy** 🏢: Raiz lógica da sua presença na OCI (parecido com uma “organização”). Tudo — usuários, políticas, compartments e recursos — existe dentro dela.  
 - **Region** 📍: Conjunto geograficamente isolado de infraestrutura (ex.: `sa-saopaulo-1`). Cada região é independente em energia, rede e capacidade.  
 - **Availability Domain (AD)** 🏬🏬🏬: Data centers independentes dentro de uma região. Falha em um AD não impacta os outros → alta disponibilidade.  
 - **Fault Domain (FD)** 🧩: Partições lógicas dentro de um AD (3 por AD). Distribuir instâncias entre FDs evita que manutenção ou falha de rack derrube todo o serviço.  
+<div align="center"><img src="slides/schema.png" alt="schema" width="600" height="300" /></div>
 - **VCN (Virtual Cloud Network)** 🔗: Rede virtual isolada (CIDR escolhido) onde vivem subnets, roteamento e segurança.  
   - **Subnet Regional** 🌍: Vale para todos os ADs, simplifica failover.  
   - **Subnet AD-Local** 📦: Fixa recursos em um AD específico.  
@@ -23,8 +28,8 @@
 Cada recurso possui um identificador global único:  
 `ocid1.<resource_type>.<realm>.<region>.<id>`  
 Exemplo: `ocid1.instance.oc1.sa-saopaulo-1.abcd...`  
-
 `<resource_type>` exemplos: `instance`, `subnet`, `vcn`, `bucket`, `autonomousdatabase`, `user`, `compartment`.
+<div align="center"><img src="slides/OCID.png" alt="OCID" width="600" height="300" /></div>
 
 #### Tipos Agregados (Resource Families)
 Usados para simplificar políticas de autorização:
@@ -97,10 +102,13 @@ Condições comuns:
 
 ## 2. Identity and Access Management (IAM)
 
+<div align="center"><img src="slides/Indentity Concepts.png" alt="Identity Concepts" width="600" height="300" /></div>
+
 ### 🔐 IAM Introduction
 Gerencia identidades (usuários, grupos, recursos) e permissões via policies legíveis. Integração com federação SAML/OAuth, MFA e identidades gerenciadas (Instance/Resource Principals).
 
 ### 📂 Compartments & 🪪 Identity Domains
+<div align="center"><img src="slides/compartment.png" alt="compartment" width="600" height="300" /></div>
 - **Compartments**: Hierarquia lógica para isolar recursos, delegar administração e facilitar billing/auditoria.  
 - **Identity Domains**: Domínios de identidade independentes com usuários, grupos, provedores de autenticação, políticas de senha e MFA. Permitem separar identidades internas/externas.
 
@@ -108,6 +116,7 @@ Gerencia identidades (usuários, grupos, recursos) e permissões via policies le
 **AuthN**: Verifica identidade. Métodos: senha + MFA, API Keys, Auth Tokens, Federation (SAML/OAuth), Instance Principals (VMs), Resource Principals (Functions/OKE), tokens de sessão.
 
 **AuthZ**: Concedida por policies (sintaxe acima). Boas práticas:
+<div align="center"><img src="slides/authZ.png" alt="authZ" width="600" height="300" /></div>
 - Princípio do menor privilégio (`use` em vez de `manage` quando possível).
 - Usar families (`instance-family`, `object-family`) reduz manutenção.
 - Dynamic Groups: agrupam recursos por condições (ex.: tag ou compartment).  
