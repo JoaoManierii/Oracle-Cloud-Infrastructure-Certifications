@@ -391,8 +391,6 @@ Volumes em rede persistentes entregues via iSCSI, montados em instâncias Comput
 - **Volume Backups**: full/incremental, agendados, armazenados em Object Storage.  
 - **Restore**: criar novo volume a partir de backup em segundos.
 
----
-
 ### 5.5 File Storage  
 Sistema de arquivos NFS montável por múltiplas instâncias simultaneamente.
 
@@ -408,3 +406,66 @@ Sistema de arquivos NFS montável por múltiplas instâncias simultaneamente.
 - **Durability & Backups**  
   - Snapshots instantâneos do File System.  
   - Clonagem copy-on-write para testes sem consumir espaço extra.  
+
+---
+
+## Capítulo 6: Security
+
+<div align="center"><img src="slides/securityServices.png" alt="security" width="600" height="300" /></div>
+
+### 6.1 Detection and Remediation  
+- **Use Cases**:  
+  - Security posture management e contínua avaliação de conformidade.  
+  - Secure Enclave (execução de workloads sensíveis em hardware isolado).  
+  - Security Advisor: recomendações de hardening e correções.  
+  - Vulnerability & Exposure Scanning para identificar gaps em VMs, containers e imagens.  
+- **Serviços OCI**:  
+  - **Cloud Guard** 🛡️: consolida sinais de segurança, detecta anomalias e aciona remediações automáticas.  
+  - **Security Zones** 🚧: impede provisão de recursos fora das políticas de segurança definidas.  
+  - **Threat Intelligence** 🔍: insights de ameaças globais e indicadores de compromisso (IOCs).  
+  - **Vulnerability Scanning** 🔎: scanner de imagens e sistemas de arquivos para CVEs.
+
+### 6.2 Data Protection  
+- **Use Cases**:  
+  - Criptografia de dados at rest e in transit.  
+  - Centralização de chaves e gerenciamento de segredos.  
+  - Discover, classify e monitoramento de dados sensíveis.  
+- **Serviços OCI**:  
+  - **Vault Key Management** 🔑: gerenciamento de chaves mestras (CMKs), rotação e políticas de acesso.  
+  - **Vault Secrets Management** 📜: armazenamento seguro de senhas, tokens e certificados.  
+  - **Data Safe** 🛡️: avaliação contínua de segurança de bancos Autonomous/DB Systems, mascaramento e auditoria.  
+  - **Certificates** 📄: emissão e gestão de TLS/SSL para Load Balancers, API Gateway, etc.
+
+### 6.3 OS and Workload Protection  
+- **Use Cases**:  
+  - Secure Boot, Measured Boot e TPM para garantir integridade do firmware/bootloader.  
+  - Isolamento de workload (bare metal vs VM vs container).  
+  - Managed Bastion para acesso seguro a redes privadas.  
+  - Patching e gestão de pacotes do SO.  
+- **Serviços OCI**:  
+  - **Shielded Instances** 🛡️: VMs que verificam integridade em todas as camadas de boot.  
+  - **Dedicated Host** 🖥️: isolamento físico de hardware para compliance/licenciamento.  
+  - **Bastion** 🔐: jump host gerenciado, sem SSH direto na internet.  
+  - **OS Management** 📦: gestão de patches, updates e inventário de pacotes.
+
+### 6.4 Identity and Access Management  
+- **Use Cases**:  
+  - Gerenciar acesso de usuários, grupos e políticas de forma centralizada.  
+  - MFA e Single Sign-On (SSO) via provedores de identidade externos.  
+  - Registro automático de chamadas API para auditoria e compliance.  
+- **Serviços OCI**:  
+  - **IAM** 👤: usuários, grupos, compartments, policies (inspect/read/use/manage).  
+  - **MFA** 🔒: autenticação multifator (TOTP, SMS, hardware token).  
+  - **Federation** 🌐: SAML/OIDC com Azure AD, Okta, etc.  
+  - **Audit** 🕵️: logging imutável de todas as chamadas de API da OCI.
+
+### 6.5 Infrastructure Protection  
+- **Use Cases**:  
+  - Proteção contra ataques DDoS em camadas de rede e aplicação.  
+  - Controles de segurança de rede: firewalls virtuais, listas de segurança e grupos de segurança.  
+  - Filtragem de tráfego malicioso em borda e VCN.  
+- **Serviços OCI**:  
+  - **DDoS Protection** ⚔️: mitigação automática em escala global.  
+  - **Web Application Firewall (WAF)** 🕸️: regras predefinidas e customizadas para proteger HTTP/S.  
+  - **Security Lists / NSG** 🔐: ACLs stateless em subnets e stateful em VNICs.  
+  - **Network Firewall** 🔥: appliance virtual gerenciado para inspeção profunda de pacotes.  
