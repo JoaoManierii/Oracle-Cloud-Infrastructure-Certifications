@@ -301,3 +301,110 @@ A família **Compute** da OCI oferece máquinas virtuais (VMs) elásticas e de a
 - **Casos de uso**: processamento de eventos, back-ends leves, orquestração de pipelines sem servidor.
 
 ---
+
+## Capítulo 5: Storage
+
+<div align="center"><img src="slides/storageServicesTypes.png" alt="sst" width="600" height="300" /></div>
+
+
+### 5.1 Storage Introduction  
+A OCI oferece quatro modelos principais de armazenamento para atender desde dados transitórios de alta velocidade até arquivos “friamente” acessados:
+
+- 🛠️ **Local NVMe (Ephemeral)**  
+- 📦 **Block Volume (Persistente)**  
+- 📂 **File Storage (Sistema de Arquivos Compartilhado)**  
+- ☁️ **Object Storage (Armazenamento de Objetos)**  
+
+Cada tipo tem características únicas de performance, durabilidade, persistência e integração com Compute/Networking.
+
+---
+
+### 5.2 Local NVMe (Ephemeral)  
+- **O que é**: SSDs NVMe locais conectados diretamente ao host da instância.  
+- **Disponível em**: Dense I/O Shapes e em alguns Bare Metal Shapes.  
+- **Características**:  
+  - **Altíssima IOPS/Throughput** (até centenas de milhares de IOPS).  
+  - **Baixa latência** (< 1 ms).  
+  - **Ephemeral**: dados são perdidos quando a instância é terminada ou reiniciada.  
+- **Use cases**:  
+  - Cache de banco de dados in-memory (Redis, Cassandra).  
+  - Processamento de logs/temp files de alta velocidade.  
+  - Workloads HPC sensíveis à latência de I/O.  
+
+---
+
+### 5.3 Object Storage  
+Armazenamento de objetos via HTTP/HTTPS, ideal para dados não estruturados (imagens, vídeos, backups, logs).
+
+#### 🎚️ Tiers e Diferenças  
+- **Standard**  
+  - Alta disponibilidade (3 cópias em múltiplos Fault Domains).  
+  - Latência de leitura/gravação otimizada.  
+  - Uso geral (site assets, streaming, CDN).  
+- **Infrequent Access**  
+  - Custo de armazenamento ~40 % menor que Standard.  
+  - Latência similar, porém custo de GET/PUT um pouco mais alto.  
+  - Ideal para archives de curto prazo, logs antigos, backups lidos ocasionalmente.  
+- **Archive**  
+  - Custo de armazenamento ~80 % menor que Standard.  
+  - Objetos precisam ser restaurados (1–12 horas) antes de leitura.  
+  - Para long-term retention de compliance e backups frios.  
+
+#### 🔄 Mudança de Tier (Lifecycle Policies)  
+- Defina políticas no bucket para migrar objetos automaticamente entre tiers após X dias de inatividade.  
+- Ex.: mover arquivos de log de Standard → Infrequent Access após 30 dias; → Archive após 180 dias.  
+
+#### 🔐 Criptografia de Dados  
+- **SSE-OCI** (server-side encryption) automática com chaves gerenciadas pela OCI.  
+- **SSE-KMS** opcional: use chaves do Vault.  
+- **Client-Side Encryption**: criptografar antes de enviar, mantendo o servidor agnóstico.  
+- **In Transit**: comunicação sempre via TLS/SSL.  
+
+#### 🔧 Recursos Adicionais  
+- **Versioning**: manter versões antigas de objetos.  
+- **Replication**: Cross-Region Replication para duplicar buckets em outra região.  
+- **Pre-Signed URLs**: acesso temporário controlado.  
+
+---
+
+### 5.4 Block Volume  
+Volumes em rede persistentes entregues via iSCSI, montados em instâncias Compute.
+
+#### 🚦 Tiers de Performance  
+| Tier                      | IOPS/TB                | Latência      | Use Case                          |
+|---------------------------|------------------------|---------------|------------------------------------|
+| **Lower Cost**            | 120–1 800              | ~2 ms         | Desenvolvimento, teste, dev       |
+| **Balanced**              | 600–12 000             | ~1 ms         | Bancos de dados gerais, apps      |
+| **Higher Performance**    | 2 400–48 000           | ~0,7 ms       | OLTP intensivo, analytics em tempo real |
+| **Ultra-High Performance**| até 1 000 000+         | < 0,5 ms      | Big Data, ML training, HPC        |
+
+#### 🔄 Resizing  
+- **Expandir**: aumentar size no Console/CLI e estender o filesystem dentro da VM sem downtime.  
+- **Reduzir**: não suportado diretamente; fluxo envolve snapshot, criar volume menor e restore.
+
+#### 🔐 Criptografia  
+- **At Rest**: SSE-OCI por padrão.  
+- **Customer-Managed Keys**: escolha chaves do Vault por volume.  
+- **In Transit**: tráfego iSCSI cifrado TLS opcional.
+
+#### 🔄 Backups & Snapshots  
+- **Volume Backups**: full/incremental, agendados, armazenados em Object Storage.  
+- **Restore**: criar novo volume a partir de backup em segundos.
+
+---
+
+### 5.5 File Storage  
+Sistema de arquivos NFS montável por múltiplas instâncias simultaneamente.
+
+- **Configuração**  
+  - Crie um File System e Mount Target em subnets públicas/privadas.  
+  - Defina Export Options (IP/CIDR, NFSv3/v4, squash).  
+- **Performance & Throughput**  
+  - **Baseline**: 2 GiB/s throughput, 30 K IOPS por TiB.  
+  - **Scale Out**: largura de banda aumenta conforme cresce o volume ou a carga.  
+- **Use Cases**  
+  - Home directories, configurações compartilhadas, aplicações legadas.  
+  - Workloads que exigem POSIX semantics e bloqueios de arquivo.  
+- **Durability & Backups**  
+  - Snapshots instantâneos do File System.  
+  - Clonagem copy-on-write para testes sem consumir espaço extra.  
