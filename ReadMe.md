@@ -146,4 +146,75 @@ Gerencia identidades (usuários, grupos, recursos) e permissões via policies le
 | MFA 🔐 | MFA | MFA/Conditional Access | MFA |
 | Audit Logs 🕵️ | CloudTrail | Activity Log | Cloud Audit Logs |
 
+## Networking
+<div align="center"><img src="slides/vcn.png" alt="vcn" width="600" height="300" /></div>
+
+
+### 3.1 🔗 VCN Introduction
+- **O que é**: Virtual Cloud Network (VCN) é sua rede virtual privada na OCI, completamente isolada e configurável (CIDR, subnets, roteamento).  
+- **Componentes principais**:  
+  - **CIDR block** (ex.: `10.0.0.0/16`)  
+  - **Subnets** (regionais ou AD-local)  
+  - **Route Tables**  
+  - **Security Lists / Network Security Groups**  
+  - **Gateways** (Internet, NAT, Service, DRG)  
+- **Caso de uso**: Criar Zonas de DMZ, redes de front-end/back-end isoladas, interligar data centers on-premises.  
+
+| OCI (VCN)           | AWS (VPC)         | Azure (VNet)      | GCP (VPC)        |
+|---------------------|-------------------|-------------------|------------------|
+| Rede global regional| Regional/global   | Regional          | Regional/global |
+| Subnets regionais   | Subnets AZ        | Subnets Region/​AZ| Subnets Global  |
+| Gateways nativos    | IGW, NAT, VGW     | Internet/NAT GW   | IGW, Cloud NAT  |
+
+---
+
+### 3.2 ➡️ VCN Routing
+- **Route Tables**: definem para onde o tráfego sai da subnet.  
+- **Tipos de rota**:  
+  - `0.0.0.0/0` → Internet Gateway (tráfego público)  
+  - `10.0.0.0/16` → Local (intra-VCN)  
+  - `Service CIDR` → Service Gateway (p. ex., Object Storage)  
+  - `DRG Attachment` → Dynamic Routing Gateway (VPN/DR)  
+- **Propagação**: rotas estáticas configuradas manualmente; rota dinâmica via DRG opcional.  
+
+| OCI (Route Tables)    | AWS (Route Tables)       | Azure (User Routes)         | GCP (Custom Routes)      |
+|-----------------------|--------------------------|-----------------------------|--------------------------|
+| Estático + DRG        | Estático + VGW BGP       | Estático + BGP ExpressRoute| Estático + Cloud Router |
+
+---
+
+### 3.3 🔐 VCN Security
+- **Security Lists**: firewall em nível de subnet (stateless).  
+- **Network Security Groups (NSG)**: firewall em nível de instância (stateful).  
+- **Ingress/Egress Rules**: portas, protocolos, CIDRs.  
+- **Private vs Public**:  
+  - **Public Subnet** com Internet Gateway + regras abertas (somente o necessário).  
+  - **Private Subnet** com NAT Gateway para saída sem entrada direta.  
+- **Opcional**: Web Application Firewall (WAF) via Load Balancer; IPS através de parceiros no Marketplace.  
+
+| OCI                   | AWS                      | Azure                         | GCP                         |
+|-----------------------|--------------------------|-------------------------------|-----------------------------|
+| Security Lists (SL)   | Network ACLs (stateless) | NSGs (stateful) + ASGs        | Firewall Rules (stateful)   |
+| NSG (stateful)        | Security Groups          | Network Security Groups       | Firewall with Tags/Service  |
+| WAF no LB             | AWS WAF + ALB/CLB        | WAF no Application Gateway    | Cloud Armor + LB           |
+
+---
+
+### 3.4 ⚖️ Load Balancer
+- **Tipos**:  
+  - **Public Load Balancer** (pública)  
+  - **Private Load Balancer** (intra-VCN)  
+  - **Opcional**: Network Load Balancer (L4) vs Application Load Balancer (L7) via partners.  
+- **Componentes**:  
+  - **Listener** (porta/protocolo)  
+  - **Backend Set** (pool de instâncias ou IPs)  
+  - **Health Checks** (HTTP, TCP)  
+  - **SSL Offload** (certificados gerenciados)  
+- **Use cases**: escalabilidade, alta disponibilidade, SSL termination, path-based routing.  
+
+| OCI LB                 | AWS ELB                       | Azure Load Balancer / App GW | GCP Cloud Load Balancing     |
+|------------------------|-------------------------------|------------------------------|------------------------------|
+| Public / Private LB    | ALB / NLB / CLB               | Public LB / Internal LB      | HTTP(S) LB / TCP/UDP LB     |
+| SSL offload integrada  | ACM + ELB                     | Managed Certificates         | Managed SSL Certs           |
+| Health Checks nativos  | Health Checks definíveis      | Health Probes                | Health Checks               |
 
