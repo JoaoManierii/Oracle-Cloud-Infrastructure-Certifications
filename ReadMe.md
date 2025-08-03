@@ -218,3 +218,80 @@ Gerencia identidades (usuários, grupos, recursos) e permissões via policies le
 | SSL offload integrada  | ACM + ELB                     | Managed Certificates         | Managed SSL Certs           |
 | Health Checks nativos  | Health Checks definíveis      | Health Probes                | Health Checks               |
 
+## Capítulo 5: Compute
+
+### 5.1 Compute Introduction  
+A família **Compute** da OCI oferece máquinas virtuais (VMs) elásticas e de alta performance para executar cargas de trabalho variadas — desde servidores web e bancos de dados até aplicações de inteligência artificial.  
+- 🖥️ **VMs gerenciadas**: Templates imutáveis, alta disponibilidade e integração nativa com Block Storage, Networking e IAM.  
+- ⚙️ **Shapes**: Configurações pré-definidas ou flexíveis de OCPU e memória, otimizadas para CPU-intensivo, memória-intensivo ou uso geral.  
+- 🔄 **Integrado** com Auto Scaling, Compartments e Observability (Monitoring/Logging) para operações DevOps/SRE.  
+
+### 5.2 Instance Basics  
+- **Image & Boot Volume**  
+  - Escolha de **imagem** (Oracle Linux, Ubuntu, Windows, custom) que define o SO e pacotes iniciais.  
+  - **Boot Volume** persistente (Block Volume) que armazena SO e dados. Pode ser copiado, ampliado e replicado.  
+- **Shapes**  
+  - **Standard Shapes** (VM.Standard2.x, VM.Standard.E3.x): balanceados.  
+  - **Dense I/O** (VM.DenseIO2.x): I/O intensivo.  
+  - **GPU Shapes** (BM.GPU2.1): para ML e render.  
+  - **Flex Shapes** (VM.Standard.E4.Flex): defina OCPUs/memória custom.  
+- **Networking**  
+  - Associação a uma **VCN + Subnet**: pública (Internet Gateway) ou privada (NAT).  
+  - Configuração de **public IP**, **private IP** e **secondary VNICs**.  
+- **Chaves SSH / Auth**  
+  - Injeção de chave pública no momento do launch.  
+  - Suporte a Instance Principals para automação sem credenciais.
+
+### 5.3 Demo: Creating a Compute Instance  
+1. **Console → Compute → Instances → Create Instance**  
+2. **Define** nome, availability domain e compartment.  
+3. **Escolher Image & Shape** (ex.: Oracle Linux 8 + VM.Standard2.1).  
+4. **Configurar Networking**: VCN, subnet, atribuir Public IP.  
+5. **Chave SSH**: colar key pública do cliente.  
+6. **Avançar**: Tags, Metadata, Boot Volume size.  
+7. **Create** → Instância provisionada em segundos.  
+8. **Acessar via SSH** (`ssh opc@<public_ip>`), validar SO e montar Block Volumes adicionais.  
+
+### 5.4 Scaling  
+- **Vertical Scaling**  
+  - **Resize** de shape (scale-up/down): requer shutdown ou live migration em determinados cases.  
+  - Ajustar OCPU/memória sem reprovisionar disco.  
+- **Horizontal Scaling**  
+  - **Instance Pools** + **Autoscaling**:  
+    - Cria grupo de instâncias idênticas (baseado em launch configuration).  
+    - Regras de autoscale (CPU, Memory, Custom Metrics) que adicionam/removem instâncias automaticamente.  
+- **Load Balancer Integration**: espalhar tráfego entre instâncias de um pool, garantindo alta disponibilidade.
+
+### 5.5 Oracle Container Engine for Kubernetes (OKE)  
+- **OKE** é o serviço gerenciado de Kubernetes da OCI:  
+  - **Clusters** control plane redundante e upgrade automático.  
+  - **Node Pools**: grupos de VMs gerenciados, usando shapes otimizados para pods.  
+  - **Auto Repair & Auto Scaling** de nós.  
+- **Integrações**:  
+  - **IAM & RBAC** nativo;  
+  - **VCN CNI** (cada pod recebe IP na VCN);  
+  - **Service Mesh** (OCI Service Mesh) para observabilidade e segurança no tráfego entre microservices.  
+- **Fluxo**:  
+  1. Criar cluster OKE  
+  2. Provisionar node pool  
+  3. `kubectl` & `helm` deploy de workloads  
+  4. Monitorar com OCI Monitoring / Prometheus  
+
+### 5.6 Container workloads in OCI  
+- **Container Instances** (Container Engine Light):  
+  - Executar containers isolados sem gerenciar VMs ou Kubernetes.  
+  - Ideal para jobs event-driven.  
+- **Registry**: Oracle Container Registry (OCIR) ou Docker Hub integrado.  
+- **DevOps Integration**: build/push automático de imagens via Code Repository + Pipelines.  
+- **Networking**: containers recebem VNICs ou compartilham da VM hospedeira, com Security Lists/NSGs aplicados.
+
+### 5.7 Serverless with Oracle Functions  
+- **Oracle Functions** é uma plataforma FaaS baseada no projeto Fn:  
+  - **Functions**: unidades leves de código (Java, Python, Go, Node.js, etc.).  
+  - **Applications**: coleções de funções que compartilham configurações e VCN.  
+  - **Triggers**: eventos que disparam funções — HTTP (API Gateway), Streaming, Object Storage, Vault.  
+- **Escalonamento automático** e **cobrança por invocação**: sem gestão de infraestrutura.  
+- **CLI & SDK**: `fn init`, `fn deploy`, integração com Terraform e Cloud Events.  
+- **Casos de uso**: processamento de eventos, back-ends leves, orquestração de pipelines sem servidor.
+
+---
