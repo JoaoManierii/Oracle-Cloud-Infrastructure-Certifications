@@ -12,6 +12,7 @@
 - **Availability Domain (AD)** 🏬🏬🏬: Data centers independentes dentro de uma região. Falha em um AD não impacta os outros → alta disponibilidade.  
 - **Fault Domain (FD)** 🧩: Partições lógicas dentro de um AD (3 por AD). Distribuir instâncias entre FDs evita que manutenção ou falha de rack derrube todo o serviço.  
 <div align="center"><img src="slides/schema.png" alt="schema" width="600" height="300" /></div>
+
 - **VCN (Virtual Cloud Network)** 🔗: Rede virtual isolada (CIDR escolhido) onde vivem subnets, roteamento e segurança.  
   - **Subnet Regional** 🌍: Vale para todos os ADs, simplifica failover.  
   - **Subnet AD-Local** 📦: Fixa recursos em um AD específico.  
