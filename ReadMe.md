@@ -218,15 +218,18 @@ Gerencia identidades (usuários, grupos, recursos) e permissões via policies le
 | SSL offload integrada  | ACM + ELB                     | Managed Certificates         | Managed SSL Certs           |
 | Health Checks nativos  | Health Checks definíveis      | Health Probes                | Health Checks               |
 
-## Capítulo 5: Compute
+## Capítulo 4: Compute
 
-### 5.1 Compute Introduction  
+### 4.1 Compute Introduction  
 A família **Compute** da OCI oferece máquinas virtuais (VMs) elásticas e de alta performance para executar cargas de trabalho variadas — desde servidores web e bancos de dados até aplicações de inteligência artificial.  
 - 🖥️ **VMs gerenciadas**: Templates imutáveis, alta disponibilidade e integração nativa com Block Storage, Networking e IAM.  
 - ⚙️ **Shapes**: Configurações pré-definidas ou flexíveis de OCPU e memória, otimizadas para CPU-intensivo, memória-intensivo ou uso geral.  
 - 🔄 **Integrado** com Auto Scaling, Compartments e Observability (Monitoring/Logging) para operações DevOps/SRE.  
 
-### 5.2 Instance Basics  
+### 4.2 Instance Basics  
+
+<div align="center"><img src="slides/instance basics.png" alt="ibs" width="600" height="300" /></div>
+
 - **Image & Boot Volume**  
   - Escolha de **imagem** (Oracle Linux, Ubuntu, Windows, custom) que define o SO e pacotes iniciais.  
   - **Boot Volume** persistente (Block Volume) que armazena SO e dados. Pode ser copiado, ampliado e replicado.  
@@ -242,7 +245,7 @@ A família **Compute** da OCI oferece máquinas virtuais (VMs) elásticas e de a
   - Injeção de chave pública no momento do launch.  
   - Suporte a Instance Principals para automação sem credenciais.
 
-### 5.3 Demo: Creating a Compute Instance  
+### 4.3 Demo: Creating a Compute Instance  
 1. **Console → Compute → Instances → Create Instance**  
 2. **Define** nome, availability domain e compartment.  
 3. **Escolher Image & Shape** (ex.: Oracle Linux 8 + VM.Standard2.1).  
@@ -252,7 +255,7 @@ A família **Compute** da OCI oferece máquinas virtuais (VMs) elásticas e de a
 7. **Create** → Instância provisionada em segundos.  
 8. **Acessar via SSH** (`ssh opc@<public_ip>`), validar SO e montar Block Volumes adicionais.  
 
-### 5.4 Scaling  
+### 4.4 Scaling  
 - **Vertical Scaling**  
   - **Resize** de shape (scale-up/down): requer shutdown ou live migration em determinados cases.  
   - Ajustar OCPU/memória sem reprovisionar disco.  
@@ -262,11 +265,14 @@ A família **Compute** da OCI oferece máquinas virtuais (VMs) elásticas e de a
     - Regras de autoscale (CPU, Memory, Custom Metrics) que adicionam/removem instâncias automaticamente.  
 - **Load Balancer Integration**: espalhar tráfego entre instâncias de um pool, garantindo alta disponibilidade.
 
-### 5.5 Oracle Container Engine for Kubernetes (OKE)  
+### 4.5 Oracle Container Engine for Kubernetes (OKE)  
+<div align="center"><img src="slides/VmVSConteiners.png" alt="vm" width="600" height="300" /></div>
 - **OKE** é o serviço gerenciado de Kubernetes da OCI:  
   - **Clusters** control plane redundante e upgrade automático.  
   - **Node Pools**: grupos de VMs gerenciados, usando shapes otimizados para pods.  
   - **Auto Repair & Auto Scaling** de nós.  
+<div align="center"><img src="slides/Container Orchestration.png" alt="cnorcs" width="600" height="300" /></div>
+
 - **Integrações**:  
   - **IAM & RBAC** nativo;  
   - **VCN CNI** (cada pod recebe IP na VCN);  
@@ -277,7 +283,7 @@ A família **Compute** da OCI oferece máquinas virtuais (VMs) elásticas e de a
   3. `kubectl` & `helm` deploy de workloads  
   4. Monitorar com OCI Monitoring / Prometheus  
 
-### 5.6 Container workloads in OCI  
+### 4.6 Container workloads in OCI  
 - **Container Instances** (Container Engine Light):  
   - Executar containers isolados sem gerenciar VMs ou Kubernetes.  
   - Ideal para jobs event-driven.  
@@ -285,7 +291,7 @@ A família **Compute** da OCI oferece máquinas virtuais (VMs) elásticas e de a
 - **DevOps Integration**: build/push automático de imagens via Code Repository + Pipelines.  
 - **Networking**: containers recebem VNICs ou compartilham da VM hospedeira, com Security Lists/NSGs aplicados.
 
-### 5.7 Serverless with Oracle Functions  
+### 4.7 Serverless with Oracle Functions  
 - **Oracle Functions** é uma plataforma FaaS baseada no projeto Fn:  
   - **Functions**: unidades leves de código (Java, Python, Go, Node.js, etc.).  
   - **Applications**: coleções de funções que compartilham configurações e VCN.  
