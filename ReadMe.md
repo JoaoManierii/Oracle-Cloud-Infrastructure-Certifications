@@ -470,3 +470,99 @@ Sistema de arquivos NFS montável por múltiplas instâncias simultaneamente.
   - **Web Application Firewall (WAF)** 🕸️: regras predefinidas e customizadas para proteger HTTP/S.  
   - **Security Lists / NSG** 🔐: ACLs stateless em subnets e stateful em VNICs.  
   - **Network Firewall** 🔥: appliance virtual gerenciado para inspeção profunda de pacotes.  
+
+## Capítulo 7: Governance and Administration
+
+### 7.1 Pricing  
+A OCI adota modelos de precificação flexíveis por recurso e região.  
+- **On-Demand**: cobra por OCPU-hora e GB-mês de armazenamento, sem compromisso mínimo.  
+- **Discounted Models**:  
+  - **Reserved Capacity Commitments** (1-3 anos) com desconto de até 45 %.  
+  - **Sustained Use Discounts**: aplica desconto automático conforme uso contínuo de OCPUs.  
+- **Preemptible / Spot (Preemptible Instances)**: até 70 % off, com possibilidade de interrupção.  
+- **Bare Metal Pricing**: preço por hora para shapes BM.*, sem hypervisor.  
+- **Região & Shape Variabilidade**: custos variam conforme região (latência, demanda) e família de shape (Standard, Dense I/O, GPU).  
+- **Pricing Calculator**: simule custos por serviço, shape e região, ajuste configurações antes de provisionar.
+
+---
+
+### 7.2 Cost Management  
+Ferramentas para análise e otimização de gastos:  
+- **Cost Analysis**  
+  - Dashboards por compartment, tag ou serviço.  
+  - Gráficos de tendência, top spenders e forecast.  
+- **Cost Reports**  
+  - Relatórios agendados (CSV/PDF) entregues por e-mail.  
+  - Cost Allocation Reports detalhando uso e custos por unidade de negócio.  
+- **Cost Categories**  
+  - Agrupe custos personalizados (ex.: “Desenvolvimento”, “Produção”).  
+  - Aplique regras para mapear contas/compartments às categorias.  
+- **Recommendations**  
+  - Idle Resources: detecta instâncias não utilizadas.  
+  - Under-utilized Volumes e Load Balancers: sugere rightsizing ou desligamento.
+
+---
+
+### 7.3 Billing & Payment Methods  
+Processo de faturamento e cobrança:  
+- **Fatura Mensal**: consolidada por tenancy, detalha serviços, regiões e impostos.  
+- **Payment Instrument**  
+  - Cartão de crédito ou débito direto.  
+  - Billing Account com múltiplos tenancies vinculados.  
+- **Currency & Tax**  
+  - Multimoeda (BRL, USD, EUR).  
+  - Configuração de impostos (IVA, ISS) de acordo com país.  
+- **Invoice Delivery**  
+  - E-mail automático para usuários designados.  
+  - Portal OCI para download histórico de faturas.
+
+---
+
+### 7.4 Budgets & Alerts  
+Controle pró-ativo de custos via orçamentos e notificações:  
+- **Budgets**  
+  - Defina orçamento por compartment ou tag (ex.: R$ 10 000/mês para “Projetos Mobile”).  
+  - Escolha período (mensal, trimestral, anual).  
+- **Alerts**  
+  - Gatêros em % de consumo (50 %, 75 %, 90 %, etc.).  
+  - Entrega via e-mail, SMS ou integração com Notifications/Streaming.  
+- **Actions Automáticas**  
+  - Invocar Functions ou Autonomous Database quando ultrapassar threshold.  
+  - Desligar recursos não críticos via Automation.
+
+---
+
+### 7.5 Tagging  
+Padronização para governança, segurança e billing:  
+- **Defined Tags**  
+  - Namespace + Tag Key + Valor predefinidos.  
+  - Ex.: `CostCenter.Dept = “TI”`, `Environment.Stage = “Prod”`.  
+- **Free-Form Tags**  
+  - Chave/valor flexível sem governo centralizado.  
+- **Tag Inheritance**  
+  - Recursos herdam tags do compartment pai ou do resource group.  
+- **Uso em Cost Management**  
+  - Filtrar Cost Analysis por tag.  
+  - Gerar relatórios de custo por projeto, time ou aplicação.  
+- **Governança**  
+  - Policies bloqueiam criação de recursos sem tags obrigatórias.  
+  - Audit verifica conformidade de tagging.
+
+---
+
+### 7.6 Support Rewards  
+Programas para reduzir custos e obter benefícios extras:  
+- **Free Tier**  
+  - **Always Free**: VMs, Block Volumes, Object Storage, Autonomous Database com quotas gratuitas permanentes.  
+  - **30-Day Trial**: $300 USD em créditos para testar serviços pagos.  
+- **Oracle Cloud Rewards**  
+  - Créditos por participação em eventos, treinamentos e hackathons.  
+  - Indique colegas para ganhar créditos adicionais.  
+- **Support Plans**  
+  - **Basic (Grátis)**: acesso ao fórum, documentação e tickets de faturamento.  
+  - **Bronze/Silver/Gold/Platinum**: níveis pagos com SLAs de 4 h a 15 min, suporte 24×7, white-glove onboarding.  
+- **Uso de Créditos**  
+  - Aplique créditos de trial e rewards para abater faturas.  
+  - Monitore saldo e expiração no portal de Billing.
+
+---
