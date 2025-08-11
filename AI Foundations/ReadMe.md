@@ -1,4 +1,4 @@
-# Oracle Cloud Infrastructure AI Foundations – Resumo de Estudos
+# Oracle Cloud Infrastructure AI Foundations – Resumo de Estudos.
 
 <div align="center"><img src="slides/disclaimer.png" alt="SaaS" width="600" height="300" /></div>
 
