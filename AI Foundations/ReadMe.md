@@ -7,6 +7,16 @@ A certificação **OCI AI Foundations** da Oracle tem como objetivo validar os c
 
 ## 2. AI Foudnations
 
+**Discuss AI Basics**  
+Inteligência Artificial (IA) é um campo da ciência da computação que busca desenvolver sistemas capazes de realizar tarefas que normalmente exigiriam inteligência humana, como reconhecimento de padrões, tomada de decisão e compreensão de linguagem natural. Os conceitos básicos envolvem a capacidade das máquinas de aprender com dados, melhorar com a experiência e simular processos cognitivos, criando soluções mais eficientes e escaláveis.
+
+**Discuss AI Applications & Types of Data**  
+As aplicações de IA estão presentes em diversas áreas, desde assistentes virtuais e sistemas de recomendação até diagnósticos médicos e veículos autônomos. Esses sistemas dependem de diferentes tipos de dados, como estruturados (bancos de dados organizados), não estruturados (textos, imagens, áudios) e semiestruturados (logs, arquivos JSON ou XML). A qualidade e a diversidade dos dados são fundamentais para o desempenho dos modelos de IA.
+
+**Explain AI vs ML vs DL**  
+Embora muitas vezes usados como sinônimos, IA, ML e DL possuem diferenças conceituais. A **IA** é o campo mais amplo, que engloba todas as técnicas para tornar máquinas inteligentes. Dentro dela, o **Machine Learning (ML)** foca em algoritmos que aprendem padrões a partir dos dados para realizar previsões ou classificações. Já o **Deep Learning (DL)** é uma subárea do ML baseada em redes neurais artificiais profundas, capaz de lidar com grandes volumes de dados e tarefas complexas, como visão computacional e processamento de linguagem natural.
+
+
 ## 3. Machine Learn Foundations
 
 ## 4. Deep Learn Foundations
