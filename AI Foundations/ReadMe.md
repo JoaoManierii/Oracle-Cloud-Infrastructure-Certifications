@@ -19,6 +19,19 @@ Embora muitas vezes usados como sinônimos, IA, ML e DL possuem diferenças conc
 
 ## 3. Machine Learn Foundations
 
+**Explain Machine Learning Basics**  
+Machine Learning (ML) é uma área da Inteligência Artificial que permite que sistemas aprendam automaticamente a partir de dados sem a necessidade de programação explícita para cada tarefa. O processo envolve fornecer dados de entrada e permitir que algoritmos descubram padrões, façam previsões e tomem decisões com base nessas informações. O objetivo principal é melhorar continuamente o desempenho conforme novos dados são processados.
+
+**Discuss Supervised Learning Fundamentals (Regression & Classification)**  
+O aprendizado supervisionado ocorre quando um modelo é treinado com dados rotulados, ou seja, entradas já associadas a respostas corretas. Dentro desse paradigma, a **regressão** é usada para prever valores contínuos, como preços ou temperaturas, enquanto a **classificação** é aplicada para categorizar informações em classes discretas, como identificar se um e-mail é spam ou não. A qualidade dos dados rotulados é essencial para o desempenho do modelo.
+
+**Discuss Unsupervised Learning Fundamentals**  
+No aprendizado não supervisionado, os dados não possuem rótulos pré-definidos, e o objetivo é identificar padrões ocultos ou agrupar informações semelhantes. Técnicas comuns incluem **clustering**, que agrupa elementos com características semelhantes, e **redução de dimensionalidade**, que simplifica conjuntos de dados complexos preservando informações relevantes. Esse tipo de aprendizado é útil em cenários de exploração, como segmentação de clientes e análise de comportamento.
+
+**Discuss Reinforcement Learning Fundamentals**  
+O aprendizado por reforço é baseado na interação de um agente com um ambiente, onde ele aprende a tomar decisões por meio de tentativa e erro. A cada ação, o agente recebe uma recompensa ou penalidade, ajustando sua estratégia para maximizar o retorno acumulado ao longo do tempo. Esse método é amplamente utilizado em robótica, jogos e sistemas autônomos, pois permite desenvolver comportamentos inteligentes em ambientes dinâmicos e complexos.
+
+
 ## 4. Deep Learn Foundations
 
 ## 5. Generative AI and LLM Foundations
