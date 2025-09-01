@@ -34,6 +34,16 @@ O aprendizado por reforço é baseado na interação de um agente com um ambient
 
 ## 4. Deep Learn Foundations
 
+**Discuss Deep Learning Fundamentals**  
+Deep Learning é uma subárea do Machine Learning que utiliza redes neurais artificiais profundas para aprender representações complexas dos dados. A principal vantagem desse paradigma é sua capacidade de lidar com grandes volumes de dados e extrair automaticamente características relevantes sem a necessidade de engenharia manual. Essa abordagem é a base de avanços recentes em visão computacional, reconhecimento de fala e processamento de linguagem natural.
+
+**Explain Convolutional Models (CNN)**  
+As Redes Neurais Convolucionais (CNNs) são especialmente projetadas para processar dados com estrutura de grade, como imagens. Elas utilizam camadas de convolução que aplicam filtros para extrair padrões locais, como bordas, formas e texturas, e camadas de pooling para reduzir a dimensionalidade mantendo informações importantes. Graças a essa arquitetura, as CNNs se tornaram a principal técnica para tarefas de visão computacional, como classificação de imagens, detecção de objetos e reconhecimento facial.
+
+**Explain Sequence Models (RNN & LSTM)**  
+Modelos de sequência, como Redes Neurais Recorrentes (RNNs), são projetados para lidar com dados sequenciais, capturando dependências temporais ou contextuais. No entanto, as RNNs tradicionais sofrem com problemas de longo prazo, como o desaparecimento do gradiente. Para resolver isso, surgiram as Long Short-Term Memory (LSTM), que introduzem mecanismos de memória capazes de armazenar informações relevantes por longos períodos. Esses modelos são amplamente utilizados em tradução automática, reconhecimento de fala e análise de séries temporais.
+
+
 ## 5. Generative AI and LLM Foundations
 
 ## 6. OCI AI Portifolio
