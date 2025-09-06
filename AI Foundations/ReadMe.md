@@ -95,4 +95,15 @@ O recurso **Select AI** integra diretamente modelos generativos ao **Oracle Auto
 **Discuss Oracle Vector Search**  
 O **Oracle Vector Search** é uma funcionalidade que adiciona suporte a embeddings vetoriais no banco de dados. Com isso, é possível realizar buscas semânticas eficientes em dados não estruturados, como documentos, imagens ou texto. Esse recurso é essencial para aplicações baseadas em **RAG (Retrieval-Augmented Generation)**, pois permite combinar a busca vetorial com modelos generativos para respostas mais contextuais e precisas.
 
-## 8. OCI AI services
+## 8. Dive-Deep into OCI AI Services
+
+**Explore OCI AI Services & related APIs (Language, Vision, Document Understanding, Speech)**  
+O **OCI AI Services** oferece um conjunto de APIs especializadas que permitem integrar inteligência artificial em aplicações corporativas sem a necessidade de criar e treinar modelos do zero. Esses serviços são totalmente gerenciados, escaláveis e podem ser consumidos diretamente via chamadas de API.  
+
+- **Language**: APIs para análise de texto, incluindo processamento de linguagem natural (NLP), extração de entidades, análise de sentimentos, classificação e tradução automática. Ideais para chatbots, análise de feedback e sistemas de suporte.  
+- **Vision**: Serviços para análise de imagens, reconhecimento de objetos, detecção de rostos e classificação de conteúdo visual. Amplamente usados em inspeção de qualidade, segurança e aplicações de reconhecimento.  
+- **Document Understanding**: APIs que permitem extrair automaticamente informações estruturadas de documentos não estruturados, como PDFs, contratos e faturas. Usado para automação de processos e redução de trabalho manual.  
+- **Speech**: Serviços de reconhecimento e síntese de fala (Speech-to-Text e Text-to-Speech), possibilitando transcrições automáticas, legendas em tempo real e interfaces de voz para aplicações.  
+
+Essas APIs são projetadas para funcionar de forma integrada, permitindo que empresas construam soluções completas que combinam linguagem, visão, documentos e fala em um mesmo fluxo inteligente.
+
