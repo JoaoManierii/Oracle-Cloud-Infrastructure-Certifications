@@ -84,7 +84,15 @@ A Oracle destaca princípios de **IA Responsável**, que incluem transparência,
 | **Infraestrutura AI (GPU/HPC)** | Bare Metal GPU (NVIDIA A100, H100), HPC Clusters, RDMA Networking | EC2 P4/P5 Instances, Elastic Inference, Trainium/Inferentia chips | Azure ND/NC Series GPUs, AI Supercomputer | TPU v5e, GPU A100/H100, AI-optimized VMs |
 | **Responsible AI** | Governança, ética, transparência integradas no OCI | AI Ethics & Responsibility Program, Model Card Toolkit | Responsible AI Dashboard, Fairness/Transparency Toolkits | Responsible AI Toolkit, Explainable AI, Model Cards |
 
+## 7. Get started with OCI Generative AI Services
 
-## 7. OCI Generative Service 
+**Describe OCI Generative AI Services**  
+O OCI Generative AI Services oferece acesso direto a modelos de linguagem de grande escala (LLMs) hospedados na Oracle Cloud, permitindo a geração de texto, resumos, traduções, classificações e assistentes conversacionais. Esses serviços eliminam a necessidade de treinar modelos do zero, já que fornecem APIs prontas para integração em aplicações corporativas, com foco em segurança, escalabilidade e governança de dados.
+
+**Discuss Autonomous Database Select AI**  
+O recurso **Select AI** integra diretamente modelos generativos ao **Oracle Autonomous Database**, permitindo consultas SQL que chamam modelos de IA para análise de texto e geração de insights em tempo real. Isso possibilita que equipes usem SQL tradicional para tarefas como sumarização de documentos, análise semântica e enriquecimento de dados, sem necessidade de pipelines externos ou reprocessamento.
+
+**Discuss Oracle Vector Search**  
+O **Oracle Vector Search** é uma funcionalidade que adiciona suporte a embeddings vetoriais no banco de dados. Com isso, é possível realizar buscas semânticas eficientes em dados não estruturados, como documentos, imagens ou texto. Esse recurso é essencial para aplicações baseadas em **RAG (Retrieval-Augmented Generation)**, pois permite combinar a busca vetorial com modelos generativos para respostas mais contextuais e precisas.
 
 ## 8. OCI AI services
