@@ -61,7 +61,20 @@ Prompt Engineering é a prática de projetar entradas (prompts) que guiem o mode
 **Explain LLM Fine-tuning**  
 Fine-tuning é o processo de ajustar um modelo de linguagem pré-treinado em um conjunto de dados específico, com o objetivo de especializá-lo em uma tarefa ou domínio. Existem diferentes abordagens, como full fine-tuning, few-shot learning ou LoRA (Low-Rank Adaptation), que variam em custo computacional e flexibilidade. Esse processo permite criar versões customizadas de LLMs para áreas como saúde, jurídico ou atendimento ao cliente.
 
-## 6. OCI AI Portifolio
+## 6. Get Started with OCI AI Stack
+
+**Discuss OCI AI Services Overview**  
+O Oracle Cloud Infrastructure (OCI) oferece uma gama de serviços de Inteligência Artificial prontos para uso, voltados a resolver problemas de negócio sem necessidade de construir modelos do zero. Entre eles estão APIs para visão computacional, processamento de linguagem natural (NLP), tradução, detecção de anomalias e reconhecimento de fala. Esses serviços são pré-treinados, escaláveis e integrados nativamente ao ecossistema OCI.
+
+**Discuss OCI ML Services Overview**  
+Os serviços de Machine Learning no OCI permitem que desenvolvedores e cientistas de dados treinem, implantem e gerenciem modelos personalizados. O **OCI Data Science** é a plataforma central para criação e treinamento de modelos, com suporte a frameworks populares como TensorFlow, PyTorch e Scikit-learn. Além disso, há integração com pipelines MLOps, automação de treinamento e suporte a notebooks Jupyter para colaboração.
+
+**Discuss OCI AI Infrastructure Overview**  
+A infraestrutura de AI do OCI fornece poder computacional otimizado para workloads intensivos, como GPUs NVIDIA A100 e clusters HPC. Ela é projetada para suportar desde treinamento de modelos de larga escala até inferência em tempo real. Além disso, a infraestrutura inclui armazenamento de alto desempenho, rede RDMA (Remote Direct Memory Access) para baixa latência e ferramentas de monitoramento e escalabilidade.
+
+**Explain Responsible AI**  
+A Oracle destaca princípios de **IA Responsável**, que incluem transparência, justiça, segurança e governança. Isso envolve fornecer modelos auditáveis, monitoramento para evitar viés, práticas de privacidade de dados e conformidade regulatória. O objetivo é garantir que as soluções de AI sejam éticas, confiáveis e aplicáveis em setores sensíveis, como saúde, finanças e governo.
+
 
 ## 7. OCI Generative Service 
 
