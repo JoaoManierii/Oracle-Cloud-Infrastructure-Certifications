@@ -107,3 +107,11 @@ O **OCI AI Services** oferece um conjunto de APIs especializadas que permitem in
 
 Essas APIs são projetadas para funcionar de forma integrada, permitindo que empresas construam soluções completas que combinam linguagem, visão, documentos e fala em um mesmo fluxo inteligente.
 
+## 📊 Comparação de APIs de AI — OCI vs AWS vs Azure vs GCP
+
+| Categoria | **OCI AI Services** | **AWS** | **Azure** | **GCP** |
+|-----------|----------------------|---------|-----------|---------|
+| **Language (NLP)** | OCI Language (análise de sentimentos, extração de entidades, tradução, classificação de texto) | Amazon Comprehend (NLP, entidades, sentimentos, tópicos) + Amazon Translate | Azure Cognitive Services – Text Analytics & Translator | Cloud Natural Language API + Translation AI |
+| **Vision (Imagens)** | OCI Vision (detecção de objetos, classificação, OCR básico) | Amazon Rekognition (objetos, rostos, moderação de imagens e vídeos) | Azure Computer Vision + Face API | Cloud Vision AI (objetos, OCR, SafeSearch, labels) |
+| **Document Understanding** | OCI Document Understanding (extração de informações estruturadas de PDFs, faturas, contratos) | Amazon Textract (OCR avançado e parsing de documentos) | Azure Form Recognizer (extração de dados estruturados de documentos) | Document AI (OCR e extração inteligente de documentos) |
+| **Speech (fala)** | OCI Speech (Speech-to-Text e Text-to-Speech) | Amazon Transcribe (STT) + Amazon Polly (TTS) | Azure Speech Services (Speech-to-Text, Text-to-Speech, tradução de fala) | Cloud Speech-to-Text + Cloud Text-to-Speech |
