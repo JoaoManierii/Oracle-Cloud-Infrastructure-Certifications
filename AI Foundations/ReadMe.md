@@ -75,6 +75,15 @@ A infraestrutura de AI do OCI fornece poder computacional otimizado para workloa
 **Explain Responsible AI**  
 A Oracle destaca princípios de **IA Responsável**, que incluem transparência, justiça, segurança e governança. Isso envolve fornecer modelos auditáveis, monitoramento para evitar viés, práticas de privacidade de dados e conformidade regulatória. O objetivo é garantir que as soluções de AI sejam éticas, confiáveis e aplicáveis em setores sensíveis, como saúde, finanças e governo.
 
+## 📊 Comparação dos serviços de AI/ML — OCI x AWS x Azure x GCP
+
+| Categoria | **OCI** | **AWS** | **Azure** | **GCP** |
+|-----------|---------|---------|-----------|---------|
+| **AI Services (APIs pré-treinadas)** | OCI AI Services (Vision, Language, Speech, Anomaly Detection, Document Understanding) | Amazon AI Services (Rekognition, Comprehend, Polly, Translate, Textract) | Azure Cognitive Services (Vision, Speech, Language, Decision) | Google Cloud AI APIs (Vision AI, Natural Language, Translation, Speech-to-Text, Document AI) |
+| **ML Services (treino e deploy)** | OCI Data Science (JupyterLab, MLOps, AutoML) | SageMaker (Studio, Training, Inference, Pipelines) | Azure ML (Designer, Notebooks, MLOps, AutoML) | Vertex AI (Training, Pipelines, Notebooks, AutoML) |
+| **Infraestrutura AI (GPU/HPC)** | Bare Metal GPU (NVIDIA A100, H100), HPC Clusters, RDMA Networking | EC2 P4/P5 Instances, Elastic Inference, Trainium/Inferentia chips | Azure ND/NC Series GPUs, AI Supercomputer | TPU v5e, GPU A100/H100, AI-optimized VMs |
+| **Responsible AI** | Governança, ética, transparência integradas no OCI | AI Ethics & Responsibility Program, Model Card Toolkit | Responsible AI Dashboard, Fairness/Transparency Toolkits | Responsible AI Toolkit, Explainable AI, Model Cards |
+
 
 ## 7. OCI Generative Service 
 
