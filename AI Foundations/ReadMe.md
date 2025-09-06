@@ -46,6 +46,21 @@ Modelos de sequência, como Redes Neurais Recorrentes (RNNs), são projetados pa
 
 ## 5. Generative AI and LLM Foundations
 
+**Discuss Generative AI Overview**  
+Generative AI é uma área da inteligência artificial focada em criar novos conteúdos, como textos, imagens, músicas ou códigos, a partir de padrões aprendidos em grandes volumes de dados. Diferente de modelos tradicionais que apenas classificam ou predizem, os modelos generativos produzem resultados originais, simulando criatividade humana. Essa tecnologia tem aplicações em chatbots, design, medicina, entretenimento e muito mais.
+
+**Discuss Large Language Models Fundamentals**  
+Os Modelos de Linguagem de Grande Escala (LLMs) são redes neurais treinadas com enormes quantidades de texto para compreender e gerar linguagem natural de forma coerente. Eles funcionam prevendo a próxima palavra em uma sequência, mas devido à sua escala e arquitetura, conseguem capturar nuances linguísticas, contextos complexos e até raciocínio. LLMs são a base de ferramentas como ChatGPT, Bard e Claude.
+
+**Explain Transformers Fundamentals**  
+A arquitetura Transformer revolucionou o processamento de linguagem natural ao introduzir mecanismos de atenção, que permitem ao modelo focar em diferentes partes de um texto ao mesmo tempo. Isso possibilita lidar com contextos longos e dependências distantes, superando limitações de modelos anteriores como RNNs e LSTMs. Transformadores são a espinha dorsal de LLMs modernos.
+
+**Explain Prompt Engineering & Instruction Tuning**  
+Prompt Engineering é a prática de projetar entradas (prompts) que guiem o modelo a produzir respostas específicas e úteis. Instruction Tuning, por sua vez, consiste em treinar o modelo para seguir instruções em linguagem natural, ajustando-o para entender melhor comandos de usuários. Essas técnicas são fundamentais para tornar LLMs mais alinhados com expectativas humanas e aplicações práticas.
+
+**Explain LLM Fine-tuning**  
+Fine-tuning é o processo de ajustar um modelo de linguagem pré-treinado em um conjunto de dados específico, com o objetivo de especializá-lo em uma tarefa ou domínio. Existem diferentes abordagens, como full fine-tuning, few-shot learning ou LoRA (Low-Rank Adaptation), que variam em custo computacional e flexibilidade. Esse processo permite criar versões customizadas de LLMs para áreas como saúde, jurídico ou atendimento ao cliente.
+
 ## 6. OCI AI Portifolio
 
 ## 7. OCI Generative Service 
