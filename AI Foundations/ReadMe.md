@@ -105,7 +105,7 @@ O **OCI AI Services** oferece um conjunto de APIs especializadas que permitem in
 - **Document Understanding**: APIs que permitem extrair automaticamente informações estruturadas de documentos não estruturados, como PDFs, contratos e faturas. Usado para automação de processos e redução de trabalho manual.  
 - **Speech**: Serviços de reconhecimento e síntese de fala (Speech-to-Text e Text-to-Speech), possibilitando transcrições automáticas, legendas em tempo real e interfaces de voz para aplicações.  
 
-Essas APIs são projetadas para funcionar de forma integrada, permitindo que empresas construam soluções completas que combinam linguagem, visão, documentos e fala em um mesmo fluxo inteligente.
+Essas APIs são projetadas para funcionar de forma integrada, permitindo que empresas construam soluções completas que combinam linguagem, visão, documentos e fala em um mesmo fluxo inteligente
 
 ## 📊 Comparação de APIs de AI — OCI vs AWS vs Azure vs GCP
 
