@@ -16,7 +16,7 @@ A Oracle está com o programa [Race to Certification 2025](https://education.ora
 | Certificação                | Status     | 
 |-----------------------------|------------|
 | **Foundations Associate** (1Z0-1085) | ✅ Obtida  | 
-| **AI Foundations Associate** (1Z0-1086) | 🔜 Em breve | 
+| **AI Foundations Associate** (1Z0-1086) | ✅ Obtida | 
 | **DevOps Professional** (1Z0-1109) | 🔜 Em breve | 
 
 > **Observação:** Eu não trabalho com Oracle no dia a dia. Minha experiência é mais com Azure e, principalmente, Google Cloud Platform (GCP). Mas todo conhecimento em cloud soma, né?
