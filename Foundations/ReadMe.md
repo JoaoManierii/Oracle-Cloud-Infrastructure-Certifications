@@ -1,4 +1,4 @@
-# Oracle Cloud Infrastructure Foundations – Resumo de Estudos
+# Oracle Cloud Infrastructure Foundations – Resumo de Estudos.
 
 <div align="center"><img src="slides/SaaS.png" alt="SaaS" width="600" height="300" /></div>
 
